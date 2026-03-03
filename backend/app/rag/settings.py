@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # -----------------------------
     # RAG Configuration (Defaults)
     # -----------------------------
-    COLLECTION_NAME: str = "active"
+    COLLECTION_NAME: str = "my_docs"
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 150
     TOP_K: int = 6
