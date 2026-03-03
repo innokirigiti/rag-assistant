@@ -21,8 +21,6 @@ settings = get_settings()
 connection = settings.DATABASE_URL  # Uses psycopg3!
 collection_name = settings.COLLECTION_NAME
 
-# Define a vector store using Postgress + pgvector
-
 
 # Expose the embeddings
 def get_embeddings():

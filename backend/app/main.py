@@ -13,6 +13,11 @@ POST /ask → accepts JSON body with question and calls QA service
 from fastapi import FastAPI
 app = FastAPI()
 
+@app.get("/health")
+def health():
+    return {"status": "Niko Hai Mzee"}
+
+
 @app.get("/")
 def greeting():
     return {"Hello from RAG assistant AI"} 
