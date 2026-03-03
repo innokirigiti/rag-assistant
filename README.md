@@ -1,13 +1,13 @@
-# 🧠 Internal Document RAG Assistant
+# 🧠  DocAI - an AI Agent assistant for documents
 
-**FastAPI + Streamlit + SQLAlchemy + pgvector + OpenAI**
+**FastAPI + Streamlit + pgvector + OpenAI**
 
 ------------------------------------------------------------------------
 
 ## 📌 Project Overview
 
 This project implements a **containerized Retrieval-Augmented Generation
-(RAG) system** for interacting with internal business documents.
+(RAG) system** for interacting with documents.
 
 Users can:
 
