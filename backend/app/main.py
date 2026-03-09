@@ -12,6 +12,7 @@ POST /ask → accepts JSON body with question and calls QA service
 
 from fastapi import FastAPI
 from app.rag.embeddings import embed_pdf
+from app.models import Question
 
 app = FastAPI()
 
@@ -30,3 +31,10 @@ def embed():
     # Hard coded test file path
     path = "../../data/uploads/test.pdf"
     return embed_pdf(path)
+
+
+# An endpoint for asking a question
+@app.post("/question")
+def create_question(data: Question):
+    query = data.question
+    return {"question": query, "answer": "This is a placeholder answer."}
