@@ -18,6 +18,7 @@ from app.rag.settings import get_settings
 # Using langchain RecursiveCharacterTextSplitter
 # paragraph → sentence → word → character
 def get_text_splitter():
+    """Return a configured text splitter for RAG chunking."""
     settings = get_settings()
 
     return RecursiveCharacterTextSplitter(
