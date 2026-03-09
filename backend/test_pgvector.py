@@ -11,6 +11,7 @@ Simple end-to-end test for:
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_postgres import PGVector
 from langchain_core.documents import Document
+from langchain_community.document_loaders import PyMuPDFLoader
 import psycopg
 
 # -----------------------------
@@ -55,19 +56,32 @@ print("Vector store ready")
 # Step 3: Create sample docs
 # -----------------------------
 
-docs = [
-    Document(page_content="Cats like to sleep in the sun."),
-    Document(page_content="Dogs are loyal animals."),
-    Document(page_content="Apples and oranges are fruits."),
-    Document(page_content="Human also like sun")
-]
+# docs = [
+#     Document(page_content="Cats like to sleep in the sun."),
+#     Document(page_content="Dogs are loyal animals."),
+#     Document(page_content="Apples and oranges are fruits."),
+#     Document(page_content="Human also like sun")
+# ]
+
+    # -----------------------------
+    # Step 3.1: Create sample docs from a pdf + chunking
+    # -----------------------------
+
+file_path = "../data/uploads/test.pdf"
+loader = PyMuPDFLoader(file_path, mode="single")
+
+docs = loader.load()
+docs[0]
+
+for doc in docs:
+    print("\n-", doc)
+
 
 print("Adding documents to vector store...")
 
 vector_store.add_documents(docs)
 
 print("Documents inserted.")
-
 
 # -----------------------------
 # Step 4: Similarity search
