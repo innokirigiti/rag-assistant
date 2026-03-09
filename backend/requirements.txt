@@ -17,6 +17,7 @@ langchain-openai
 langchain-postgres
 langchain-huggingface
 langgraph
+langchain-text-splitters
 
 # Local embeddings
 sentence-transformers
