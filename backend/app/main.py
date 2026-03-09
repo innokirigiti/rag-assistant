@@ -11,6 +11,8 @@ POST /ask → accepts JSON body with question and calls QA service
 '''
 
 from fastapi import FastAPI
+from app.rag.embeddings import embed_pdf
+
 app = FastAPI()
 
 @app.get("/health")
@@ -21,3 +23,10 @@ def health():
 @app.get("/")
 def greeting():
     return {"Hello from RAG assistant AI"} 
+
+# TODO: update to accept a pdf file path from the UI later
+@app.get("/embed")
+def embed():
+    # Hard coded test file path
+    path = "../../data/uploads/test.pdf"
+    return embed_pdf(path)
