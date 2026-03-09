@@ -11,7 +11,7 @@ reset_collection() (single document rule)
 
 get_retriever(k=None, search_type="similarity", filters=None)
 '''
-from langchain_openai import OpenAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_postgres import PGVector
 from app.rag.settings import get_settings
 
@@ -24,7 +24,7 @@ collection_name = settings.COLLECTION_NAME
 
 # Expose the embeddings
 def get_embeddings():
-    return OpenAIEmbeddings(model=settings.OPENAI_EMBED_MODEL)
+    return HuggingFaceEmbeddings(model_name=settings.EMBEDDING_MODEL)
 
 # Expose the vector_store
 def get_vectorstore():

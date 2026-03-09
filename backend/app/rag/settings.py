@@ -14,13 +14,14 @@ settings = get_settings()
 settings.OPENAI_API_KEY
 '''
 
+
 class Settings(BaseSettings):
+
     # -----------------------------
-    # OpenAI
+    # Embeddings
     # -----------------------------
-    OPENAI_API_KEY: str
-    OPENAI_EMBED_MODEL: str
-    OPENAI_CHAT_MODEL: str
+    EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
+    EMBEDDING_DIM: int = 384
 
     # -----------------------------
     # Database
@@ -32,20 +33,17 @@ class Settings(BaseSettings):
     POSTGRES_DB: str | None = None
 
     # -----------------------------
-    # UI
+    # API
     # -----------------------------
     API_BASE_URL: str | None = None
 
     # -----------------------------
-    # RAG Configuration (Defaults)
+    # RAG Configuration
     # -----------------------------
     COLLECTION_NAME: str = "my_docs"
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 150
     TOP_K: int = 6
-
-    # Optional: useful for enforcing embedding dimension
-    EMBEDDING_DIM: int = 3072  # text-embedding-3-large default
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -57,4 +55,3 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

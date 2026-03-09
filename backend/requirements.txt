@@ -1,13 +1,28 @@
 fastapi
 uvicorn[standard]
+
+# Database
 sqlalchemy
 psycopg[binary]
 pgvector
+
+# File processing
 pymupdf
 python-multipart
 python-dotenv
+
+# LangChain ecosystem
 langchain
 langchain-openai
+langchain-postgres
+langchain-huggingface
 langgraph
+
+# Local embeddings
+sentence-transformers
+torch
+transformers
+
+# OpenAI LLM
 openai
 tiktoken
