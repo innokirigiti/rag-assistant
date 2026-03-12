@@ -29,13 +29,6 @@ def health():
 def greeting():
     return {"Hello from RAG assistant AI"} 
 
-# TODO: update to accept a pdf file path from the UI later
-# @app.get("/embed")
-# def embed():
-#     # Hard coded test file path
-#     path = "../../data/uploads/test.pdf"
-#     return embed_pdf(path)
-
 @app.post("/uploadpdf")
 async def upload_pdf(file: UploadFile = File(...)):
 
@@ -55,6 +48,9 @@ async def upload_pdf(file: UploadFile = File(...)):
     # Save the file
     with open(save_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
+
+    # Embed the file into the vector db using the file path
+    embed_pdf(str(save_path))
 
     return {
         "status": "uploaded",
