@@ -17,8 +17,10 @@ import shutil
 # App modules
 from app.rag.embeddings import embed_pdf
 from app.models import Question
+from app.rag.retrieval import retrieve_top_k_chunks
 
 app = FastAPI()
+
 
 @app.get("/health")
 def health():
@@ -27,7 +29,8 @@ def health():
 
 @app.get("/")
 def greeting():
-    return {"Hello from RAG assistant AI"} 
+    return {"Hello from RAG assistant AI"}
+
 
 @app.post("/uploadpdf")
 async def upload_pdf(file: UploadFile = File(...)):
@@ -52,14 +55,23 @@ async def upload_pdf(file: UploadFile = File(...)):
     # Embed the file into the vector db using the file path
     embed_pdf(str(save_path))
 
-    return {
-        "status": "uploaded",
-        "filename": file.filename,
-        "path": str(save_path)
-    }
+    return {"status": "uploaded", "filename": file.filename, "path": str(save_path)}
+
 
 # An endpoint for asking a question
+# TODO: Extend to perform LLM calls of top K chunks & return LLM answer
 @app.post("/question")
 def create_question(data: Question):
     query = data.question
-    return {"question": query, "answer": "This is a placeholder answer."}
+    top_k_chunks = retrieve_top_k_chunks(query=query)
+
+    # Loop through the list of docs & generate a list of content
+    chunk_content_list = []
+    for chunk in top_k_chunks:
+        chunk_content_list.append(chunk.page_content)
+
+    return {
+        "question": query,
+        "answer": "This is a placeholder answer.",
+        "top_chunks": chunk_content_list,
+    }
