@@ -17,7 +17,6 @@ import shutil
 # App modules
 from app.rag.embeddings import embed_pdf
 from app.models import Question
-from app.rag.retrieval import retrieve_top_k_chunks
 from app.rag.retrieval import generate_llm_answer
 
 app = FastAPI()
