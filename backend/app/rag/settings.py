@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     EMBEDDING_DIM: int = 384
 
     # -----------------------------
+    # LLM
+    # -----------------------------
+    OPENAI_CHAT_MODEL:str
+
+    # -----------------------------
     # Database
     # -----------------------------
     DATABASE_URL: str
