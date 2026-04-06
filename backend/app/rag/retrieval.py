@@ -5,11 +5,11 @@ Expose:
 
 QAService
 
-answer(question: str, top_k: int | None = None) -> dict
+answer(question: str) -> dict
 
 Return dict example:
 
-{"answer": "...", "sources": [...], "used_top_k": k}
+{"answer": "...", "sources": [...]}
 
 (Maybe I can keep sources as a list of dicts extracted from metadata.)
 '''
@@ -25,3 +25,11 @@ def retrieve_top_k_chunks(query: str):
     vector_store = get_vectorstore()
 
     return vector_store.similarity_search(query=query, k = settings.TOP_K)
+
+def generate_llm_answer(query: str) -> dict:
+    """Takes in a user query and returns an llm generated answer"""
+
+    # Generate the context from the query (top k chunks)
+    context = retrieve_top_k_chunks(query)
+
+    return {"answer": "LLM answer placeholder", }
